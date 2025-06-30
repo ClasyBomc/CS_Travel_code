@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Simple India Travel App</title>
+    <!-- We use Tailwind CSS here. It's like a special toolbox for making websites look nice easily! -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- This helps us use a nice font called 'Inter' for all the text. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* This sets the main font style and a soft background color for our whole page. */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Holi Theme: Light and playful base background */
+            background-color: #fce4ec; /* Very light pink, like a base for colors */
+        }
+        /* This part makes the scroll bar look nice, like a little colored ribbon. */
+        ::-webkit-scrollbar {
+            width: 8px; /* How wide the scroll bar is */
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; /* The path the scroll bar thumb moves on */
+            border-radius: 10px; /* Makes the corners rounded */
+        }
+        ::-webkit-scrollbar-thumb {
+            /* Holi Theme: Brighter scrollbar color */
+            background: #ff7f50; /* Coral, vibrant! */
+            border-radius: 10px; /* Makes its corners rounded too */
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff6347; /* It gets a bit darker when you put your mouse over it */
+        }
+
+        /* This is for the big picture at the top (Hero section). */
+        .big-picture-section {
+            /* We use a placeholder image here. You can change this to a real picture later! */
+            background-image: url('jal mahal.jpeg');
+            background-size: cover; /* Makes sure the image covers the whole area */
+            background-position: center; /* Centers the image */
+            position: relative; /* Helps us place other things on top of it */
+        }
+        /* This makes the big picture a bit darker so the text on top is easy to read. */
+        .picture-overlay {
+            background-color: rgba(0, 0, 0, 0.4); /* A see-through dark color */
+        }
+
+        /* This makes our destination cards pop out a little when you hover over them. */
+        .place-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Makes the movement smooth */
+        }
+        .place-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* This style is for the menu links at the top to show which page is active (if we were using it). */
+        .menu-link.active {
+            /* Holi Theme: Bright red for active link */
+            border-bottom: 3px solid #ff4500; /* Orange-red */
+            font-weight: 700; /* Makes the text bold */
+        }
+        /* This makes sure our detail pages (like Jaipur's page) are tall enough. */
+        .place-detail-page {
+            min-height: calc(100vh - 120px); /* Adjusts height based on header/footer */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- This is the top part of our website, like a sign board. -->
+    <header class="bg-gradient-to-r from-[#ff4500] to-[#ffd700] text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-3xl font-extrabold tracking-wide mb-2 md:mb-0">
+                <span class="text-[#fce4ec]">RANGILA</span> India's ONENESS <!-- "Rangila" means colorful! -->
+            </h1>
+            <!-- This is our menu bar. -->
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#home" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Home</a></li>
+                    <li><a href="#places" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Places</a></li>
+                    <li><a href="#app-features" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Features</a></li>
+                    <li><a href="#live-location" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Live Location</a></li>
+                    <li><a href="#find-guide" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Find Guide</a></li>
+                    <li><a href="#weather-forecast" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Weather</a></li>
+                    <li><a href="#emergency-alerts" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Alerts</a></li>
+                    <li><a href="#ai-trip-planner" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">AI Planner</a></li> <!-- New nav item -->
+                    <li><a href="#plan-trip" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">Plan Trip</a></li>
+                    <li><a href="#about-us" class="menu-link text-lg hover:text-[#fce4ec] transition duration-300 ease-in-out pb-1">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- This is the big, welcoming section at the very top. -->
+    <section id="home" class="big-picture-section h-[60vh] flex items-center justify-center text-center">
+        <div class="picture-overlay absolute inset-0"></div> <!-- Makes the picture darker -->
+        <div class="relative z-10 p-6 rounded-lg shadow-xl max-w-3xl mx-auto">
+            <h2 class="text-5xl font-bold text-white mb-4 drop-shadow-lg">Discover the Royal Charms of India</h2>
+            <p class="text-xl text-[#ffebcd] mb-8">Come with us on a journey to amazing places, full of old stories and beautiful traditions.</p>
+            <button class="bg-[#ff4500] hover:bg-[#ff6347] text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Start Your Adventure!
+            </button>
+        </div>
+    </section>
+
+    <!-- This section shows all the cool places we can visit. -->
+    <section id="places" class="py-16 bg-[#fffcf5]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-12 drop-shadow-sm">Our Grand Indian Places</h2>
+            <div id="places-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Place Card 1: Jaipur -->
+                <div class="place-card bg-white rounded-xl shadow-lg overflow-hidden border border-[#f0d0b0]">
+                    <img src="pink-palace-hawa-mahal-jaipur-260nw-2157917463.webp" alt="Jaipur Pink City" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-[#ff6347] mb-2">Jaipur: The Pink City</h3>
+                        <p class="text-gray-700 mb-4 text-justify">Explore Jaipur, where buildings are pink, forts are grand, and markets are full of life. It's a city alive with history!</p>
+                        <ul class="list-disc list-inside text-gray-600 mb-4">
+                            <li>Amber Fort (a huge old fort!)</li>
+                            <li>Hawa Mahal (Wind Palace, with many windows)</li>
+                            <li>City Palace (where kings used to live)</li>
+                        </ul>
+                        <button class="see-more-btn bg-[#ff4500] hover:bg-[#ff6347] text-white font-medium py-2 px-5 rounded-full text-sm" data-place="jaipur">See More</button>
+                    </div>
+                </div>
+
+                <!-- Place Card 2: Agra -->
+                <div class="place-card bg-white rounded-xl shadow-lg overflow-hidden border border-[#f0d0b0]">
+                    <img src="agra.jpg" alt="Agra Taj Mahal" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-[#ff6347] mb-2">Agra: City of the Taj</h3>
+                        <p class="text-gray-700 mb-4 text-justify">Visit Agra, home of the beautiful Taj Mahal. There are also many old forts and tombs with amazing stories.</p>
+                        <ul class="list-disc list-inside text-gray-600 mb-4">
+                            <li>Taj Mahal (the famous white building)</li>
+                            <li>Agra Fort (another big fort)</li>
+                            <li>Fatehpur Sikri (an old, empty city)</li>
+                        </ul>
+                        <button class="see-more-btn bg-[#ff4500] hover:bg-[#ff6347] text-white font-medium py-2 px-5 rounded-full text-sm" data-place="agra">See More</button>
+                    </div>
+                </div>
+
+                <!-- Place Card 3: Varanasi -->
+                <div class="place-card bg-white rounded-xl shadow-lg overflow-hidden border border-[#f0d0b0]">
+                    <img src="varanasi.webp" alt="Varanasi Ganges River" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-[#ff6347] mb-2">Varanasi: Holy City</h3>
+                        <p class="text-gray-700 mb-4 text-justify">Varanasi is a very old and special city by the holy Ganges River. See ancient temples and unique ceremonies here.</p>
+                        <ul class="list-disc list-inside text-gray-600 mb-4">
+                            <li>Ganges River Banks (Ghats)</li>
+                            <li>Kashi Vishwanath Temple (an important temple)</li>
+                            <li>Sarnath (where Buddha taught)</li>
+                        </ul>
+                        <button class="see-more-btn bg-[#ff4500] hover:bg-[#ff6347] text-white font-medium py-2 px-5 rounded-full text-sm" data-place="varanasi">See More</button>
+                    </div>
+                </div>
+
+                <!-- Place Card 4: Jodhpur -->
+                <div class="place-card bg-white rounded-xl shadow-lg overflow-hidden border border-[#f0d0b0]">
+                    <img src="jdhpur.jpg" alt="Jodhpur Blue City" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-[#ff6347] mb-2">Jodhpur: The Blue City</h3>
+                        <p class="text-gray-700 mb-4 text-justify">Discover Jodhpur, famous for its blue houses and the enormous Mehrangarh Fort. Walk through its blue streets and lively markets.</p>
+                        <ul class="list-disc list-inside text-gray-600 mb-4">
+                            <li>Mehrangarh Fort (a giant fort)</li>
+                            <li>Jaswant Thada (a beautiful marble memorial)</li>
+                            <li>Ghanta Ghar (the Clock Tower)</li>
+                        </ul>
+                        <button class="see-more-btn bg-[#ff4500] hover:bg-[#ff6347] text-white font-medium py-2 px-5 rounded-full text-sm" data-place="jodhpur">See More</button>
+                    </div>
+                </div>
+
+                <!-- Place Card 5: Goa -->
+                <div class="place-card bg-white rounded-xl shadow-lg overflow-hidden border border-[#f0d0b0]">
+                    <img src="goa.webp" alt="Goa Beach" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-[#ff6347] mb-2">Goa: Beaches & Heritage</h3>
+                        <p class="text-gray-700 mb-4 text-justify">Relax on golden beaches, explore charming old churches, and experience the lively nightlife of India's favorite coastal state. A blend of Indian and Portuguese cultures awaits!</p>
+                        <ul class="list-disc list-inside text-gray-600 mb-4">
+                            <li>Calangute Beach</li>
+                            <li>Old Goa Churches</li>
+                            <li>Anjuna Flea Market</li>
+                        </ul>
+                        <button class="see-more-btn bg-[#ff4500] hover:bg-[#ff6347] text-white font-medium py-2 px-5 rounded-full text-sm" data-place="goa">See More</button>
+                    </div>
+                </div>
+
+                <!-- Place Card 6: Mumbai -->
+                <div class="place-card bg-white rounded-xl shadow-lg overflow-hidden border border-[#f0d0b0]">
+                    <img src="mumbai.jpg" alt="Mumbai Marine Drive" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-[#ff6347] mb-2">Mumbai: City of Dreams</h3>
+                        <p class="text-gray-700 mb-4 text-justify">Experience the energetic pulse of India's financial and entertainment capital. Enjoy the iconic Marine Drive, bustling markets, and historical landmarks by the Arabian Sea.</p>
+                        <ul class="list-disc list-inside text-gray-600 mb-4">
+                            <li>Gateway of India</li>
+                            <li>Marine Drive</li>
+                            <li>Elephanta Caves</li>
+                        </ul>
+                        <button class="see-more-btn bg-[#ff4500] hover:bg-[#ff6347] text-white font-medium py-2 px-5 rounded-full text-sm" data-place="mumbai">See More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- This new section highlights the app's features -->
+    <section id="app-features" class="py-16 bg-[#fce4ec]">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-[#e04e4e] mb-8 drop-shadow-sm">What Our App Offers</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+                Rangila India Journeys is designed to make your travel planning easy and exciting. Here are some key features:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#ffd700]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Discover Top Destinations</h3>
+                    <p class="text-gray-700">Browse through a curated list of India's most vibrant and historically rich cities with captivating overview and stunning visuals.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#ff7f50]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Detailed Place Information</h3>
+                    <p class="text-gray-700">Dive deeper into each city with detailed descriptions of key attractions, complete with brief insights into their significance.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#4CAF50]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Personalized Trip Planning</h3>
+                    <p class="text-gray-700">Use our intuitive "Plan Your Journey" form to tell us your preferences, and we'll help you craft the perfect itinerary.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#1E90FF]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Live Location Tracking</h3>
+                    <p class="text-gray-700">Enable real-time location sharing to keep your loved ones updated on your whereabouts during your journey, providing peace of mind.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#ff4500]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Find Nearby Guides</h3>
+                    <p class="text-gray-700">Quickly locate and connect with experienced local guides to enrich your exploration and navigate new places effortlessly.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#ffd700]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Weather Forecasting</h3>
+                    <p class="text-gray-700">Get up-to-date weather forecasts and best seasons to visit for your chosen destinations to help you pack smart and plan activities.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#ff7f50]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Emergency Alerts</h3>
+                    <p class="text-gray-700">Stay informed with critical emergency alerts and advisories for your travel locations.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#4CAF50]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">AI-Powered Trip Planner</h3> <!-- New feature description -->
+                    <p class="text-gray-700">Generate custom trip itineraries with AI, tailored to your preferences, duration, and interests.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#1E90FF]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Vibrant & User-Friendly Design</h3>
+                    <p class="text-gray-700">Enjoy a visually appealing interface inspired by the colorful festival of Holi, ensuring a delightful browsing experience.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-[#ff4500]">
+                    <h3 class="text-xl font-semibold text-[#ff4500] mb-3">Easy Navigation</h3>
+                    <p class="text-gray-700">Smooth scrolling and clear menu links ensure you can find exactly what you're looking for with ease.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New section for Live Location feature -->
+    <section id="live-location" class="py-16 bg-[#f7ede2]">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-[#e04e4e] mb-8 drop-shadow-sm">Live Location Tracking</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+                Share your current location with your guardians in real-time. This feature helps ensure your safety and keeps your loved ones informed during your travels.
+            </p>
+            <div class="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-[#ffd700]">
+                <p id="location-status" class="text-gray-700 mb-4 text-lg font-medium">Location status: Not tracking</p>
+                <div id="location-display" class="bg-gray-100 p-4 rounded-md text-left break-words mb-6 text-sm">
+                    Click 'Start Tracking' to view your current location.
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <button id="start-tracking-btn" class="bg-[#4CAF50] hover:bg-[#388E3C] text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                        Start Tracking
+                    </button>
+                    <button id="stop-tracking-btn" class="bg-[#ff4500] hover:bg-[#ff6347] text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg hidden">
+                        Stop Tracking
+                    </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                    Note: This is a demo feature. In a real application, location data would be securely transmitted and shared with authorized guardians.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New section for Find Guide feature -->
+    <section id="find-guide" class="py-16 bg-[#fffcf5]">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-[#e04e4e] mb-8 drop-shadow-sm">Find Nearby Guides</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+                Looking for a local expert? Use this feature to find available guides in your current vicinity.
+            </p>
+            <div class="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-[#ffd700]">
+                <p id="guide-status" class="text-gray-700 mb-4 text-lg font-medium">Guide search status: Ready to search</p>
+                <div id="guide-results" class="bg-gray-100 p-4 rounded-md text-left break-words mb-6 text-sm">
+                    Click 'Find Guides' to see local guides.
+                </div>
+                <button id="find-guide-btn" class="bg-[#1E90FF] hover:bg-[#1C86EE] text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                    Find Guides
+                </button>
+                <p class="text-xs text-gray-500 mt-4">
+                    Note: This is a demo feature. In a real application, this would involve a database of guides and more sophisticated matching.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New section for Weather Forecast feature -->
+    <section id="weather-forecast" class="py-16 bg-[#f7ede2]">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-[#e04e4e] mb-8 drop-shadow-sm">Weather Forecast</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+                Get real-time weather updates and best seasons to visit for your travel destinations.
+            </p>
+            <div class="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-[#ffd700]">
+                <div class="mb-4">
+                    <label for="city-input" class="block text-gray-700 text-lg font-medium mb-2">Enter City Name:</label>
+                    <input type="text" id="city-input" placeholder="e.g., Jaipur" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#1E90FF] focus:border-[#1E90FF] text-lg">
+                </div>
+                <button id="get-weather-btn" class="bg-[#20B2AA] hover:bg-[#2F9B9A] text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                    Get Weather
+                </button>
+                <div id="weather-results" class="mt-6 bg-gray-100 p-4 rounded-md text-left break-words text-sm">
+                    Enter a city and click 'Get Weather'.
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                    Note: This is a demo feature. Weather data is simulated for common cities.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New section for Emergency Alerts feature -->
+    <section id="emergency-alerts" class="py-16 bg-[#fffcf5]">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-[#e04e4e] mb-8 drop-shadow-sm">Emergency Alerts</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+                Receive important safety alerts and advisories for your current or planned locations.
+            </p>
+            <div class="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-[#ffd700]">
+                <p id="alert-status" class="text-gray-700 mb-4 text-lg font-medium">Alert Status: No active alerts checked</p>
+                <div id="alert-display" class="bg-gray-100 p-4 rounded-md text-left break-words text-sm">
+                    Click 'Check for Alerts' to see if there are any current advisories.
+                </div>
+                <button id="check-alerts-btn" class="bg-[#ff4500] hover:bg-[#ff6347] text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                    Check for Alerts
+                </button>
+                <p class="text-xs text-gray-500 mt-4">
+                    Note: This is a demo feature. Alerts are simulated.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New section for AI-Powered Trip Planner -->
+    <section id="ai-trip-planner" class="py-16 bg-[#f7ede2]">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-[#e04e4e] mb-8 drop-shadow-sm">AI-Powered Trip Planner</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+                Tell our AI about your dream trip, and let it craft a personalized itinerary for you!
+            </p>
+            <div class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-[#ffd700]">
+                <div class="mb-4">
+                    <label for="ai-prompt-input" class="block text-gray-700 text-lg font-medium mb-2">Describe your ideal trip:</label>
+                    <textarea id="ai-prompt-input" rows="6" placeholder="e.g., Plan a 3-day cultural trip to Jaipur for a family with two kids, budget around 40,000 INR.&#10;Or: A relaxing 5-day beach getaway in Goa for a couple, focused on good food and sunsets." class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#1E90FF] focus:border-[#1E90FF] text-lg"></textarea>
+                </div>
+                <button id="generate-ai-plan-btn" class="bg-[#8A2BE2] hover:bg-[#6A1BBF] text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                    Generate Plan
+                </button>
+                <div id="ai-plan-results" class="mt-6 bg-gray-100 p-4 rounded-md text-left break-words text-sm whitespace-pre-wrap">
+                    Your AI-generated trip plan will appear here.
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                    Note: AI generation may take a few moments. The quality of the plan depends on your detailed description.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- These are the special pages that show more details for each place. They are hidden at first. -->
+
+    <!-- Jaipur Detail Page -->
+    <section id="jaipur-page" class="place-detail-page py-16 bg-[#fffcf5] hidden">
+        <div class="container mx-auto px-4">
+            <button class="back-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-full mb-8 transition duration-300" data-target-section="places">
+                &larr; Back to All Places
+            </button>
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-10 drop-shadow-sm">Explore Jaipur: The Pink City</h2>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+                Jaipur, the capital of Rajasthan, is a mix of old history and new city life. Its special pink buildings, lively markets, and grand forts and palaces make you feel like you've gone back in time to when kings and queens ruled.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="amber.jpg" alt="Amber Fort Jaipur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The majestic Amber Fort, a blend of Hindu-Mughal architecture, known for its artistic style elements and stunning views.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="pink-palace-hawa-mahal-jaipur-260nw-2157917463.webp" alt="Hawa Mahal Jaipur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The iconic 'Palace of Winds' with its unique five-story exterior, built for royal ladies to observe street festivals.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="https://placehold.co/600x400/ffe066/8b4513?text=City+Palace+Courtyard" alt="City Palace Jaipur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A grand complex of palaces, gardens, and courtyards, reflecting a fusion of Rajput, Mughal, and European styles.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="jal mahal.jpeg" alt="Jal Mahal Jaipur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A beautiful palace located in the middle of Man Sagar Lake, appearing to float on the water.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="albert hall meuseum.jpg" alt="Albert Hall Museum Jaipur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The oldest museum in Rajasthan, housing a rich collection of artifacts including paintings, carpets, and jewelry.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="jaipur bazar.jpg" alt="Jaipur Local Bazaar" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Vibrant and bustling markets like Johari Bazaar, famous for jewelry, textiles, and traditional crafts.</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed">
+                From the tiny windows of Hawa Mahal to the big open spaces of City Palace, Jaipur is amazing to look at. Don't forget to visit the colorful markets to buy traditional clothes, jewelry, and handmade items.
+            </p>
+        </div>
+    </section>
+
+    <!-- Agra Detail Page -->
+    <section id="agra-page" class="place-detail-page py-16 bg-[#fffcf5] hidden">
+        <div class="container mx-auto px-4">
+            <button class="back-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-full mb-8 transition duration-300" data-target-section="places">
+                &larr; Back to All Places
+            </button>
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-10 drop-shadow-sm">Explore Agra: City of the Taj Mahal</h2>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+                Agra, by the Yamuna River, is famous for the incredible Taj Mahal, a world wonder and a sign of forever love. But there's more to Agra than just the Taj Mahal, with other grand old buildings.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="taj mahal.jpg" alt="Taj Mahal Agra" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The magnificent white marble mausoleum, a symbol of eternal love and a UNESCO World Heritage site.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="agra fort.jpg" alt="Agra Fort" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A powerful fortress made of red sandstone, which served as the main residence of the Mughal emperors.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="fathehpur.jpg" alt="Fatehpur Sikri" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A perfectly preserved ghost city built by Emperor Akbar, known for its grand buildings and unique architecture.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="mehtab.jpeg" alt="Mehtab Bagh with Taj View" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A charbagh (four-part garden) complex across the Yamuna River, offering a perfect view of the Taj Mahal.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="dulla.webp" alt="Tomb of Itmad-ud-Daula" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Often called the 'Baby Taj', this tomb is a delicate marble masterpiece preceding the Taj Mahal.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="local crafts.jpg" alt="Agra Local Crafts" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Agra is famous for marble inlay work, leather goods, and other traditional handicrafts.</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed">
+                Visit the grand Agra Fort and the old, quiet city of Fatehpur Sikri. Both tell stories of Mughal emperors and their amazing buildings.
+            </p>
+        </div>
+    </section>
+
+    <!-- Varanasi Detail Page -->
+    <section id="varanasi-page" class="place-detail-page py-16 bg-[#fffcf5] hidden">
+        <div class="container mx-auto px-4">
+            <button class="back-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-full mb-8 transition duration-300" data-target-section="places">
+                &larr; Back to All Places
+            </button>
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-10 drop-shadow-sm">Explore Varanasi: Holy Heart of India</h2>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+                Varanasi, also called Kashi, is one of the oldest cities where people still live today. It's a very spiritual place by the holy Ganges River, offering a special cultural and religious experience.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="ganges river.jpg" alt="Ganges River Ghats Varanasi" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Witness the spiritual dawn as devotees gather for rituals on the sacred Ganges River banks.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="aartu.avif" alt="Ganga Aarti Varanasi" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The captivating evening ceremony where priests offer prayers with lamps to the holy River Ganges.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="vishwanath temple.jpg" alt="Kashi Vishwanath Temple" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">One of the most famous Hindu temples dedicated to Lord Shiva, a central part of Varanasi's spiritual identity.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="sarnath.webp" alt="Sarnath Buddha Temple" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A significant Buddhist site where Lord Buddha first taught the Dharma after attaining enlightenment.</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed">
+                Watch the beautiful Ganga Aarti ceremony, take a boat ride as the sun rises, and walk through the winding streets filled with old temples and lively local life. You should also visit Sarnath, where Buddha first taught his ideas.
+            </p>
+        </div>
+    </section>
+
+    <!-- Jodhpur Detail Page -->
+    <section id="jodhpur-page" class="place-detail-page py-16 bg-[#fffcf5] hidden">
+        <div class="container mx-auto px-4">
+            <button class="back-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-full mb-8 transition duration-300" data-target-section="places">
+                &larr; Back to All Places
+            </button>
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-10 drop-shadow-sm">Explore Jodhpur: The Blue City</h2>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+                Jodhpur, with its famous blue-painted houses, stands proudly at the edge of the Thar Desert. With the huge Mehrangarh Fort watching over it, this 'Blue City' gives you a taste of Rajasthan's desert charm and rich history.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="meh.webp" alt="Mehrangarh Fort Jodhpur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A colossal fortress perched on a hilltop, offering panoramic views of the Blue City and housing impressive palaces.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="Jaswant_Thada_Architecture_b869c0ba.avif" alt="Jaswant Thada Jodhpur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A beautiful marble cenotaph built in memory of Maharaja Jaswant Singh II, known for its intricate carvings.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="bhawan place.jpg" alt="Umaid Bhawan Palace Jodhpur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A grand royal palace, part hotel, part museum, and part royal residence, an architectural marvel.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="blue.jpg" alt="Jodhpur Blue Houses" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Wander through the charming narrow alleys of the old city, painted in distinctive blue hues.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="clock tower jodh.jpg" alt="Ghanta Ghar Clock Tower Jodhpur" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The lively Sardar Market surrounding the iconic Ghanta Ghar (Clock Tower), famous for spices and handicrafts.</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed">
+                Explore the giant Mehrangarh Fort for amazing views, visit the peaceful Jaswant Thada, and wander through the busy Sardar Market near the Clock Tower. Jodhpur's blue alleys are perfect for taking beautiful pictures!
+            </p>
+        </div>
+    </section>
+
+    <!-- Goa Detail Page -->
+    <section id="goa-page" class="place-detail-page py-16 bg-[#fffcf5] hidden">
+        <div class="container mx-auto px-4">
+            <button class="back-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-full mb-8 transition duration-300" data-target-section="places">
+                &larr; Back to All Places
+            </button>
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-10 drop-shadow-sm">Explore Goa: Beaches & Heritage</h2>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+                Goa is India's smallest state but a giant when it comes to tourism! Famous for its stunning coastline, from peaceful coves to bustling party spots, it also boasts a rich history evident in its charming churches and colonial architecture.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="calangute-beach-goa-7-musthead-hero.webp" alt="Calangute Beach Goa" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">One of Goa's most popular and bustling beaches, known for its lively atmosphere and water sports.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="bascila.jpg" alt="Basilica of Bom Jesus Goa" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A UNESCO World Heritage site in Old Goa, famous for housing the mortal remains of St. Francis Xavier.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="arjuna.jpg" alt="Anjuna Flea Market Goa" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A vibrant Wednesday market offering everything from handicrafts and jewelry to clothes and souvenirs.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="dudhsagar-falls_trek_Goa.webp" alt="Dudhsagar Falls Goa" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A spectacular four-tiered waterfall on the Mandovi River, resembling a 'sea of milk'.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="poelem beach.jpg" alt="Palolem Beach Goa" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A beautiful crescent-shaped beach in South Goa, known for its calm waters and relaxed vibe.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="fish curry.jpg" alt="Goan Fish Curry" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Savor the unique flavors of Goan food, a delicious blend of Indian, Portuguese, and Konkani influences.</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed">
+                Whether you're looking for sun-soaked relaxation, thrilling water sports, or a taste of unique Indo-Portuguese culture and cuisine, Goa has it all. Don't miss the vibrant markets and delicious seafood!
+            </p>
+        </div>
+    </section>
+
+    <!-- Mumbai Detail Page -->
+    <section id="mumbai-page" class="place-detail-page py-16 bg-[#fffcf5] hidden">
+        <div class="container mx-auto px-4">
+            <button class="back-btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-full mb-8 transition duration-300" data-target-section="places">
+                &larr; Back to All Places
+            </button>
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-10 drop-shadow-sm">Explore Mumbai: The City of Dreams</h2>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-10 leading-relaxed">
+                Mumbai, India's bustling financial and entertainment hub, is a city that never sleeps. From colonial architecture and vibrant street life to the glamour of Bollywood and serene coastal promenades, Mumbai offers a diverse and unforgettable experience.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="gateway.jpg" alt="Gateway of India Mumbai" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Mumbai's most famous monument, a grand arch overlooking the Arabian Sea, built to commemorate King George V's visit.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="marine.jpg" alt="Marine Drive Mumbai" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">Also known as 'The Queen's Necklace,' this beautiful promenade along the Arabian Sea is perfect for evening strolls.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="chhatrapati-shivaji-maharaj-terminus-mumbai-maharashtra-1-attr-hero.jpeg" alt="Chhatrapati Shivaji Maharaj Terminus" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">A historic railway station and UNESCO World Heritage site, a stunning example of Victorian Gothic architecture.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="dhobhi.webp" alt="Dhobi Ghat Mumbai" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The world's largest open-air laundromat, where clothes are washed in large open concrete wash pens.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="Mumbai_Bandra-Worli_Sea_Link (1).jpg" alt="Bandra-Worli Sea Link Mumbai" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">An impressive cable-stayed bridge connecting Bandra with Worli, offering panoramic city and sea views.</p>
+                </div>
+                <!-- Image with description -->
+                <div class="rounded-lg shadow-md overflow-hidden bg-white p-2">
+                    <img src="bollywood.webp" alt="Bollywood Mumbai" class="w-full h-64 object-cover rounded-lg">
+                    <p class="text-sm text-gray-600 mt-2">The heart of the Indian film industry, visit film city or a studio to get a glimpse of moviemaking.</p>
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed">
+                Take a stroll along the iconic Marine Drive, visit the historic Gateway of India, or explore the bustling markets and vibrant cultural scene. Mumbai's energy is truly infectious.
+            </p>
+        </div>
+    </section>
+
+    <!-- This section is where you can plan your trip! -->
+    <section id="plan-trip" class="py-16 bg-[#f7ede2]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-[#e04e4e] mb-12 drop-shadow-sm">Plan Your Special Journey</h2>
+            <div class="max-w-xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-[#f0d0b0]">
+                <form id="trip-form" class="space-y-6">
+                    <!-- Input field for Your Name -->
+                    <div>
+                        <label for="your-name" class="block text-gray-700 text-lg font-medium mb-2">Your Name:</label>
+                        <input type="text" id="your-name" name="your-name" placeholder="e.g., Arjun Singh" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                    </div>
+                    <!-- Input field for Your Email -->
+                    <div>
+                        <label for="your-email" class="block text-gray-700 text-lg font-medium mb-2">Your Email:</label>
+                        <input type="email" id="your-email" name="your-email" placeholder="e.g., your.email@example.com" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                    </div>
+
+                    <div>
+                        <label for="chosen-place" class="block text-gray-700 text-lg font-medium mb-2">Which place do you want to visit?</label>
+                        <select id="chosen-place" name="chosen-place" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                            <option value="">Choose a Place</option>
+                            <option value="Jaipur">Jaipur, Rajasthan</option>
+                            <option value="Agra">Agra, Uttar Pradesh</option>
+                            <option value="Varanasi">Varanasi, Uttar Pradesh</option>
+                            <option value="Jodhpur">Jodhpur, Rajasthan</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="other">Other (Tell us below)</option>
+                        </select>
+                    </div>
+                    <div id="other-place-box" class="hidden">
+                        <label for="other_place_name" class="block text-gray-700 text-lg font-medium mb-2">What other place?</label>
+                        <input type="text" id="other_place_name" name="other_place_name" placeholder="e.g., Amritsar, Shimla" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                    </div>
+                    <div>
+                        <label for="dates-input" class="block text-gray-700 text-lg font-medium mb-2">When do you want to travel?</label>
+                        <input type="text" id="dates-input" name="dates-input" placeholder="e.g., Dec 15 - Dec 22, 2024" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                    </div>
+                    <div>
+                        <label for="how-many-people" class="block text-gray-700 text-lg font-medium mb-2">How many people are traveling?</label>
+                        <input type="number" id="how-many-people" name="how-many-people" min="1" value="1" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                    </div>
+                    <div>
+                        <label for="contact-number" class="block text-gray-700 text-lg font-medium mb-2">Your Contact Number:</label>
+                        <input type="tel" id="contact-number" name="contact-number" placeholder="e.g., +91 9876543210" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                    </div>
+                    <!-- New input field for Travel Budget Range -->
+                    <div>
+                        <label for="travel-budget" class="block text-gray-700 text-lg font-medium mb-2">Your Travel Budget Range:</label>
+                        <input type="text" id="travel-budget" name="travel-budget" placeholder="e.g., INR 20,000 - 50,000 or $500 - $1000" class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg">
+                    </div>
+                    <div>
+                        <label for="extra-notes" class="block text-gray-700 text-lg font-medium mb-2">Any special requests or things you like?</label>
+                        <textarea id="extra-notes" name="extra-notes" rows="4" placeholder="e.g., I like cultural tours, specific foods, or fun outdoor activities..." class="w-full p-3 border border-gray-300 rounded-md focus:ring-[#ff4500] focus:border-[#ff4500] text-lg"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-[#ff4500] hover:bg-[#ff6347] text-white font-semibold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 text-lg">
+                        Send My Plan
+                    </button>
+                </form>
+                <div id="form-result" class="mt-6 p-4 bg-[#ffd700] text-[#ff4500] rounded-md text-center hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- This section tells you about our design. -->
+    <section id="about-us" class="py-16 bg-[#fffcf5]">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-[#e04e4e] mb-8 drop-shadow-sm">About Our Holi-Inspired Design</h2>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-6">
+                We've embraced the joyful spirit of Holi, the Festival of Colors, in this app's design. The vibrant palette aims to reflect the excitement and energy of a journey through India.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6 mb-8">
+                <div class="w-24 h-24 rounded-full flex items-center justify-center text-white text-sm font-semibold shadow-md" style="background-color: #ff4500;">
+                    Bright Orange <!-- Like Gulal! -->
+                </div>
+                <div class="w-24 h-24 rounded-full flex items-center justify-center text-white text-sm font-semibold shadow-md" style="background-color: #ffd700;">
+                    Golden Yellow <!-- Like Turmeric! -->
+                </div>
+                <div class="w-24 h-24 rounded-full flex items-center justify-center text-white text-sm font-semibold shadow-md" style="background-color: #4CAF50;">
+                    Vibrant Green <!-- Like nature's colors! -->
+                </div>
+                <div class="w-24 h-24 rounded-full flex items-center justify-center text-white text-sm font-semibold shadow-md" style="background-color: #1E90FF;">
+                    Sky Blue <!-- Like clear skies! -->
+                </div>
+                <div class="w-24 h-24 rounded-full flex items-center justify-center text-gray-800 text-sm font-semibold shadow-md" style="background-color: #fce4ec;">
+                    Soft Pink Base <!-- A gentle canvas! -->
+                </div>
+            </div>
+            <p class="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                This spectrum of colors, inspired by the joyous celebration, creates an inviting and energetic user experience. The rounded elements add a touch of softness and modern appeal.
+            </p>
+        </div>
+    </section>
+
+    <!-- This is the very bottom part of our website. -->
+    <footer class="bg-gradient-to-r from-[#ff4500] to-[#ffd700] text-white p-6 text-center shadow-inner">
+        <div class="container mx-auto">
+            <p class="mb-2">&copy; 2025 Rangila India Journeys. All rights reserved.</p>
+            <p class="text-sm">Made with love for a Class 11 Project.</p>
+            <!-- Placeholder for contact information -->
+            <p class="text-sm mt-2">
+                For inquiries: Email: <a href="mailto:info@rangilaindia.com" class="underline hover:text-white">info@rangilaindia.com</a> | Call: +91 98765 43210
+            </p>
+            <div class="flex justify-center mt-4 space-x-4">
+                <a href="#" class="text-[#fce4ec] hover:text-white transition duration-300">Privacy Rules</a>
+                <a href="#" class="text-[#fce4ec] hover:text-white transition duration-300">Our Rules</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // --- JavaScript Code - This makes our website interactive! ---
+
+        // Variable to store the watchPosition ID for live location tracking
+        let watchId = null;
+
+        // Function to scroll to a specific section and update active navigation link
+        function scrollToSection(sectionId) {
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                const headerOffset = document.querySelector('header').offsetHeight;
+                const elementPosition = targetSection.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+
+                // Update active state for nav links
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                const activeLink = document.querySelector(`nav a[href="#${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        }
+
+        // 1. Make the menu links jump smoothly to sections.
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // Stop the link from doing its normal quick jump
+                const targetId = this.getAttribute('href').substring(1); // Get the section ID (e.g., "home", "places")
+
+                // For main navigation, just scroll
+                scrollToSection(targetId);
+
+                // Stop live location tracking if navigating away
+                if (targetId !== 'live-location') {
+                    stopTracking();
+                }
+                // Clear guide search if navigating away
+                if (targetId !== 'find-guide') {
+                    resetGuideSearch();
+                }
+                // Clear weather forecast if navigating away
+                if (targetId !== 'weather-forecast') {
+                    resetWeatherForecast();
+                }
+                // Clear emergency alerts if navigating away
+                if (targetId !== 'emergency-alerts') {
+                    resetEmergencyAlerts();
+                }
+                // Clear AI trip plan if navigating away
+                if (targetId !== 'ai-trip-planner') {
+                    resetAITripPlanner();
+                }
+            });
+        });
+
+        // 2. Handle the "Other" option in the trip planning form.
+        const placeChooser = document.getElementById('chosen-place'); // Our "Which place" dropdown
+        const otherPlaceInputBox = document.getElementById('other-place-box'); // The hidden box for "Other" place
+        const otherPlaceNameInput = document.getElementById('other_place_name'); // The text input inside the hidden box
+
+        if (placeChooser && otherPlaceInputBox && otherPlaceNameInput) {
+            placeChooser.addEventListener('change', function() {
+                if (this.value === 'other') { // If "Other" is chosen
+                    otherPlaceInputBox.classList.remove('hidden'); // Show the hidden box
+                    otherPlaceNameInput.setAttribute('required', 'required'); // Make it a required field
+                } else {
+                    otherPlaceInputBox.classList.add('hidden'); // Hide the box
+                    otherPlaceNameInput.removeAttribute('required'); // It's no longer required
+                    otherPlaceNameInput.value = ''; // Clear any text in it
+                }
+            });
+        }
+
+        // 3. Handle when someone sends their trip plan.
+        const tripPlanForm = document.getElementById('trip-form'); // Our trip planning form
+        const formMessageBox = document.getElementById('form-result'); // The box where we show messages after sending
+
+        if (tripPlanForm && formMessageBox) {
+            tripPlanForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Stop the form from reloading the page
+
+                // Get new form values
+                const yourName = document.getElementById('your-name').value;
+                const yourEmail = document.getElementById('your-email').value;
+
+                let chosenPlace = placeChooser.value; // Get the chosen place from the dropdown
+                if (chosenPlace === 'other') {
+                    chosenPlace = otherPlaceNameInput.value.trim(); // If "Other", use text from the input box
+                    if (!chosenPlace) { // If "Other" was chosen but nothing was typed
+                        formMessageBox.textContent = 'Please tell us your other place name.';
+                        formMessageBox.classList.remove('hidden');
+                        formMessageBox.classList.add('bg-red-200', 'text-red-700'); // Show an error message
+                        return; // Stop here
+                    }
+                }
+
+                const tripDates = document.getElementById('dates-input').value;
+                const numberOfPeople = document.getElementById('how-many-people').value;
+                const contactNumber = document.getElementById('contact-number').value;
+                const travelBudget = document.getElementById('travel-budget').value; // Get the new travel budget
+                const notes = document.getElementById('extra-notes').value;
+
+                // Simple check if main fields are empty (now including name, email, and contact number)
+                if (!yourName || !yourEmail || !chosenPlace || !tripDates || !numberOfPeople || !contactNumber || !travelBudget) {
+                    formMessageBox.textContent = 'Please fill in all the main boxes (Name, Email, Place, Dates, People, Contact Number, Travel Budget).';
+                    formMessageBox.classList.remove('hidden');
+                    formMessageBox.classList.add('bg-red-200', 'text-red-700'); // Show an error message
+                    return; // Stop here
+                }
+
+                // If everything is okay, we pretend to send the data (in a real app, it would go to a server)
+                console.log('Trip Plan Sent:');
+                console.log('Your Name:', yourName);
+                console.log('Your Email:', yourEmail);
+                console.log('Chosen Place:', chosenPlace);
+                console.log('Dates:', tripDates);
+                console.log('Number of People:', numberOfPeople);
+                console.log('Contact Number:', contactNumber);
+                console.log('Travel Budget:', travelBudget); // Log the new travel budget
+                console.log('Extra Notes:', notes);
+
+                // Show a success message!
+                formMessageBox.textContent = `Thank you, ${yourName}! Your plan for ${chosenPlace} has been received. Happy Journey! We'll talk to you soon at ${yourEmail} or ${contactNumber}!`;
+                formMessageBox.classList.remove('hidden');
+                formMessageBox.classList.remove('bg-red-200', 'text-red-700'); // Remove error style
+                formMessageBox.classList.add('bg-[#ffd700]', 'text-[#ff4500]'); // Add success style
+
+                // Clear the form for the next plan
+                tripPlanForm.reset();
+                otherPlaceInputBox.classList.add('hidden'); // Hide "other" box again
+                otherPlaceNameInput.removeAttribute('required');
+            });
+        }
+
+        // --- JavaScript for showing and hiding detailed place pages ---
+
+        const mainPlacesGrid = document.getElementById('places-list'); // The big list of all places
+        const allDetailPages = document.querySelectorAll('.place-detail-page'); // All the individual place detail pages
+
+        // Function to show a specific detail page and hide the main places grid
+        function showOnePlacePage(placeId) {
+            // Hide all main content sections (all sections with an ID)
+            document.querySelectorAll('section[id]').forEach(section => {
+                // Ensure only primary sections are hidden/shown by checking if they are not detail pages
+                if (!section.classList.contains('place-detail-page')) {
+                     section.classList.add('hidden');
+                }
+            });
+
+            document.querySelectorAll('.place-detail-page').forEach(page => {
+                page.classList.add('hidden'); // Hide all detail pages first
+            });
+
+            const targetPage = document.getElementById(`${placeId}-page`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden'); // Show the specific page
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+            }
+            // Ensure main nav links are not active when a detail page is shown
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Stop relevant features when navigating to a detail page
+            stopTracking();
+            resetGuideSearch();
+            resetWeatherForecast();
+            resetEmergencyAlerts();
+            resetAITripPlanner();
+        }
+
+        // Function to hide all detail pages and show the main places grid again
+        function showAllPlacesGrid() {
+            document.querySelectorAll('.place-detail-page').forEach(page => {
+                page.classList.add('hidden'); // Hide all detail pages
+            });
+            // Show all main sections again for scrolling flow
+            document.querySelectorAll('section[id]').forEach(section => {
+                section.classList.remove('hidden');
+            });
+            scrollToSection('places'); // Scroll to the places section
+        }
+
+        // Event listeners for "See More" buttons (for place detail pages)
+        document.querySelectorAll('.see-more-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const place = this.dataset.place;
+                showOnePlacePage(place);
+            });
+        });
+
+        // Event listeners for "Back to All Places" buttons on detail pages
+        document.querySelectorAll('.back-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                showAllPlacesGrid(); // Go back to the main list
+            });
+        });
+
+
+        // --- Live Location Feature Functions ---
+
+        const startTrackingBtn = document.getElementById('start-tracking-btn');
+        const stopTrackingBtn = document.getElementById('stop-tracking-btn');
+        const locationStatus = document.getElementById('location-status');
+        const locationDisplay = document.getElementById('location-display');
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            const timestamp = new Date(position.timestamp).toLocaleString();
+
+            locationDisplay.innerHTML = `
+                <p><strong>Latitude:</strong> ${latitude.toFixed(6)}</p>
+                <p><strong>Longitude:</strong> ${longitude.toFixed(6)}</p>
+                <p><strong>Accuracy:</strong> &plusmn;${accuracy.toFixed(2)} meters</p>
+                <p><strong>Last updated:</strong> ${timestamp}</p>
+                <p class="mt-2">
+                    <a href="https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}" target="_blank" class="text-[#1E90FF] hover:underline">View on Google Maps</a>
+                </p>
+            `;
+            locationStatus.textContent = 'Location status: Tracking active';
+            console.log(`Live Location: Lat ${latitude}, Lon ${longitude} (Accuracy: ${accuracy}m)`);
+            // In a real app, this data would be securely transmitted and shared with authorized guardians.
+        }
+
+        function showError(error) {
+            let errorMessage = 'Location error: ';
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    errorMessage += 'User denied the request for Geolocation. Please allow location access.';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    errorMessage += 'Location information is unavailable.';
+                    break;
+                case error.TIMEOUT:
+                    errorMessage += 'The request to get user location timed out.';
+                    break;
+                case error.UNKNOWN_ERROR:
+                    errorMessage += 'An unknown error occurred.';
+                    break;
+            }
+            locationStatus.textContent = `Location status: Error!`;
+            locationDisplay.innerHTML = `<p class="text-red-600">${errorMessage}</p>`;
+            console.error(errorMessage);
+            stopTracking(); // Stop tracking on error
+        }
+
+        function startTracking() {
+            if (navigator.geolocation) {
+                locationStatus.textContent = 'Location status: Starting tracking...';
+                locationDisplay.innerHTML = 'Attempting to get your current location...';
+                // Options for watchPosition: enableHighAccuracy, timeout, maximumAge
+                const options = {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                };
+                watchId = navigator.geolocation.watchPosition(showPosition, showError, options);
+                startTrackingBtn.classList.add('hidden');
+                stopTrackingBtn.classList.remove('hidden');
+            } else {
+                locationStatus.textContent = 'Location status: Error!';
+                locationDisplay.innerHTML = '<p class="text-red-600">Geolocation is not supported by this browser.</p>';
+            }
+        }
+
+        function stopTracking() {
+            if (watchId !== null) {
+                navigator.geolocation.clearWatch(watchId);
+                watchId = null;
+                locationStatus.textContent = 'Location status: Not tracking';
+                locationDisplay.innerHTML = 'Tracking stopped. Click "Start Tracking" to resume.';
+                startTrackingBtn.classList.remove('hidden');
+                stopTrackingBtn.classList.add('hidden');
+                console.log('Live location tracking stopped.');
+            }
+        }
+
+        // Add event listeners for the new live location buttons
+        if (startTrackingBtn) {
+            startTrackingBtn.addEventListener('click', startTracking);
+        }
+        if (stopTrackingBtn) {
+            stopTrackingBtn.addEventListener('click', stopTracking);
+        }
+
+        // --- Find Guide Feature Functions ---
+        const findGuideBtn = document.getElementById('find-guide-btn');
+        const guideStatus = document.getElementById('guide-status');
+        const guideResults = document.getElementById('guide-results');
+
+        function findGuides() {
+            guideStatus.textContent = 'Guide search status: Searching for guides...';
+            guideResults.innerHTML = 'Getting your location to find guides...';
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    guideStatus.textContent = 'Guide search status: Guides found!';
+                    guideResults.innerHTML = `
+                        <p>Searching for guides near: Lat ${latitude.toFixed(6)}, Lon ${longitude.toFixed(6)}</p>
+                        <ul class="list-disc list-inside mt-2 ml-4">
+                            <li><strong>Guide 1:</strong> Ramesh Kumar (5 years experience) - Available now! <a href="#" class="text-[#1E90FF] hover:underline">(Contact)</a></li>
+                            <li><strong>Guide 2:</strong> Priya Sharma (Specialty: Historical Sites) - Available from 2 PM <a href="#" class="text-[#1E90FF] hover:underline">(Contact)</a></li>
+                            <li><strong>Guide 3:</strong> David Singh (Speaks French, German) - Available tomorrow <a href="#" class="text-[#1E90FF] hover:underline">(Contact)</a></li>
+                        </ul>
+                        <p class="mt-4">Please contact guides directly for booking and availability.</p>
+                    `;
+                    console.log(`Finding guides near: Lat ${latitude}, Lon ${longitude}`);
+                }, (error) => {
+                    let errorMessage = 'Could not find guides: ';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage += 'Location access denied. Please enable location to find guides.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage += 'Location information is unavailable.';
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage += 'Request to get location timed out.';
+                            break;
+                        case error.UNKNOWN_ERROR:
+                            errorMessage += 'An unknown error occurred.';
+                            break;
+                    }
+                    guideStatus.textContent = `Guide search status: Error!`;
+                    guideResults.innerHTML = `<p class="text-red-600">${errorMessage}</p>`;
+                    console.error(errorMessage);
+                }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
+            } else {
+                guideStatus.textContent = 'Guide search status: Error!';
+                guideResults.innerHTML = '<p class="text-red-600">Geolocation is not supported by this browser.</p>';
+            }
+        }
+
+        function resetGuideSearch() {
+            guideStatus.textContent = 'Guide search status: Ready to search';
+            guideResults.innerHTML = 'Click \'Find Guides\' to see local guides.';
+        }
+
+        if (findGuideBtn) {
+            findGuideBtn.addEventListener('click', findGuides);
+        }
+
+        // --- Weather Forecast Feature Functions ---
+        const cityInput = document.getElementById('city-input');
+        const getWeatherBtn = document.getElementById('get-weather-btn');
+        const weatherResults = document.getElementById('weather-results');
+
+        const weatherData = {
+            "jaipur": {
+                city: "Jaipur",
+                temperature: "32°C (90°F)",
+                condition: "Sunny",
+                humidity: "40%",
+                wind: "10 km/h",
+                forecast: "Clear skies all day.",
+                bestSeason: "October to March"
+            },
+            "agra": {
+                city: "Agra",
+                temperature: "35°C (95°F)",
+                condition: "Partly Cloudy",
+                humidity: "45%",
+                wind: "12 km/h",
+                forecast: "Warm with some clouds, risk of a light shower late afternoon.",
+                bestSeason: "October to March"
+            },
+            "varanasi": {
+                city: "Varanasi",
+                temperature: "30°C (86°F)",
+                condition: "Humid & Hazy",
+                humidity: "70%",
+                wind: "8 km/h",
+                forecast: "Hot and humid, hazy conditions expected.",
+                bestSeason: "October to March"
+            },
+            "jodhpur": {
+                city: "Jodhpur",
+                temperature: "38°C (100°F)",
+                condition: "Hot & Dry",
+                humidity: "20%",
+                wind: "15 km/h",
+                forecast: "Very hot and dry, typical desert weather.",
+                bestSeason: "October to March"
+            },
+            "goa": {
+                city: "Goa",
+                temperature: "28°C (82°F)",
+                condition: "Monsoon Showers",
+                humidity: "85%",
+                wind: "20 km/h",
+                forecast: "Frequent rain showers with high humidity. Carry an umbrella!",
+                bestSeason: "November to February"
+            },
+            "mumbai": {
+                city: "Mumbai",
+                temperature: "29°C (84°F)",
+                condition: "Cloudy with Drizzle",
+                humidity: "80%",
+                wind: "18 km/h",
+                forecast: "Overcast with light drizzle, typical monsoon weather.",
+                bestSeason: "October to March"
+            },
+            "delhi": { // Added for completeness/example
+                city: "Delhi",
+                temperature: "37°C (98°F)",
+                condition: "Smoggy",
+                humidity: "35%",
+                wind: "5 km/h",
+                forecast: "Hot and calm with significant smog.",
+                bestSeason: "October to March"
+            }
+        };
+
+        function getWeatherData() {
+            const cityName = cityInput.value.toLowerCase().trim();
+            weatherResults.innerHTML = `Fetching weather for ${cityInput.value}...`;
+
+            // Simulate API call delay
+            setTimeout(() => {
+                const data = weatherData[cityName];
+                if (data) {
+                    weatherResults.innerHTML = `
+                        <p class="font-bold text-lg">${data.city}: ${data.temperature}</p>
+                        <p>Condition: ${data.condition}</p>
+                        <p>Humidity: ${data.humidity}</p>
+                        <p>Wind: ${data.wind}</p>
+                        <p class="mt-2">Forecast: ${data.forecast}</p>
+                        <p class="mt-2 text-green-700">Best Season to Visit: ${data.bestSeason}</p>
+                    `;
+                } else {
+                    weatherResults.innerHTML = `<p class="text-red-600">Weather data not found for "${cityInput.value}". Try Jaipur, Agra, Varanasi, Jodhpur, Goa, Mumbai, or Delhi.</p>`;
+                }
+            }, 1000); // Simulate 1 second loading time
+        }
+
+        function resetWeatherForecast() {
+            cityInput.value = '';
+            weatherResults.innerHTML = 'Enter a city and click \'Get Weather\'.';
+        }
+
+        if (getWeatherBtn) {
+            getWeatherBtn.addEventListener('click', getWeatherData);
+        }
+
+        // --- Emergency Alerts Feature Functions ---
+        const checkAlertsBtn = document.getElementById('check-alerts-btn');
+        const alertStatus = document.getElementById('alert-status');
+        const alertDisplay = document.getElementById('alert-display');
+
+        const emergencyAlerts = {
+            "jaipur": "Moderate heatwave advisory issued for Jaipur. Stay hydrated and avoid peak sun hours.",
+            "mumbai": "Heavy rainfall warning for coastal areas. Avoid unnecessary travel.",
+            "varanasi": "No specific emergency alerts for Varanasi at this time.",
+            "general": "No widespread emergency alerts across major tourist destinations currently. Always check local news."
+        };
+
+        function checkEmergencyAlerts() {
+            alertStatus.textContent = 'Alert Status: Checking for active alerts...';
+            alertDisplay.innerHTML = 'Searching for advisories...';
+
+            // Simulate fetching alert based on a random city or a placeholder for demo
+            const cities = ["jaipur", "mumbai", "varanasi", "general"];
+            const randomCity = cities[Math.floor(Math.random() * cities.length)];
+            const alertMessage = emergencyAlerts[randomCity];
+
+            setTimeout(() => {
+                if (alertMessage) {
+                    if (randomCity === "general" || alertMessage.includes("No specific")) {
+                         alertStatus.textContent = 'Alert Status: No immediate alerts';
+                         alertDisplay.innerHTML = `<p>${alertMessage}</p>`;
+                    } else {
+                        alertStatus.textContent = `Alert Status: Active Alert for ${randomCity.charAt(0).toUpperCase() + randomCity.slice(1)}`;
+                        alertDisplay.innerHTML = `<p class="text-red-700 font-semibold">${alertMessage}</p>`;
+                    }
+                } else {
+                    alertStatus.textContent = 'Alert Status: No alerts found';
+                    alertDisplay.innerHTML = '<p>No active emergency alerts at this time.</p>';
+                }
+            }, 1500); // Simulate 1.5 second loading time
+        }
+
+        function resetEmergencyAlerts() {
+            alertStatus.textContent = 'Alert Status: No active alerts checked';
+            alertDisplay.innerHTML = 'Click \'Check for Alerts\' to see if there are any current advisories.';
+        }
+
+        if (checkAlertsBtn) {
+            checkAlertsBtn.addEventListener('click', checkEmergencyAlerts);
+        }
+
+        // --- AI-Powered Trip Planner Functions ---
+        const aiPromptInput = document.getElementById('ai-prompt-input');
+        const generateAiPlanBtn = document.getElementById('generate-ai-plan-btn');
+        const aiPlanResults = document.getElementById('ai-plan-results');
+
+        async function generateAITripPlan() {
+            const userPrompt = aiPromptInput.value.trim();
+            if (!userPrompt) {
+                aiPlanResults.innerHTML = '<p class="text-red-600">Please describe your trip to get a plan.</p>';
+                return;
+            }
+
+            aiPlanResults.innerHTML = '<p>Generating your personalized trip plan... <span class="animate-pulse">⏳</span></p>';
+            generateAiPlanBtn.disabled = true; // Disable button during generation
+
+            try {
+                let chatHistory = [];
+                chatHistory.push({ role: "user", parts: [{ text: `Generate a trip itinerary based on the following request. Be concise, informative, and suggest relevant places in India. If the user doesn't specify duration, assume 3 days. If the user doesn't specify budget, assume a moderate budget. Output directly the itinerary, do not include any conversational text outside the itinerary: ${userPrompt}` }] });
+                
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will automatically provide the API key
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    aiPlanResults.innerHTML = `<p>${text}</p>`;
+                } else {
+                    aiPlanResults.innerHTML = '<p class="text-red-600">Could not generate a plan. Please try again or rephrase your request.</p>';
+                    console.error('Unexpected API response structure:', result);
+                }
+            } catch (error) {
+                aiPlanResults.innerHTML = `<p class="text-red-600">Error generating plan: ${error.message}. Please check your input and try again.</p>`;
+                console.error('Error calling Gemini API:', error);
+            } finally {
+                generateAiPlanBtn.disabled = false; // Re-enable button
+            }
+        }
+
+        function resetAITripPlanner() {
+            aiPromptInput.value = '';
+            aiPlanResults.innerHTML = 'Your AI-generated trip plan will appear here.';
+            generateAiPlanBtn.disabled = false;
+        }
+
+        if (generateAiPlanBtn) {
+            generateAiPlanBtn.addEventListener('click', generateAITripPlan);
+        }
+
+        // Ensure active link highlighting on scroll
+        const allMainSections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let currentSectionId = 'home'; // Default to home
+
+            allMainSections.forEach(section => {
+                // Exclude detail pages from the main scroll tracking for navigation highlights
+                if (!section.classList.contains('place-detail-page')) {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    const headerHeight = document.querySelector('header').offsetHeight; // Get height of our top bar
+
+                    // A little buffer for better activation
+                    const buffer = 50;
+
+                    if (window.scrollY >= sectionTop - headerHeight - buffer && window.scrollY < sectionTop + sectionHeight - headerHeight - buffer) {
+                        currentSectionId = section.id;
+                    }
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Set active link for home on initial load and handle URL hashes
+        window.addEventListener('load', () => {
+            const initialHash = window.location.hash.substring(1); // Remove '#' from the hash
+            if (initialHash && document.getElementById(initialHash)) {
+                scrollToSection(initialHash);
+            } else {
+                scrollToSection('home'); // Default to home section
+            }
+        });
+
+    </script>
+
+</body>
+</html>
